@@ -18,7 +18,7 @@ exports.signup = async (req, res) => {
     const user = new User({ firstName, lastName, email, password });
     await user.save();
 
-    const token = jwt.sign({ id: user._id }, 'your_jwt_secret', { expiresIn: '1h' });
+    const token = jwt.sign({ id: user._id }, 'ihhoh88h8h8h8h', { expiresIn: '1h' });
 
     res.status(201).json({ token, user });
   } catch (error) {
@@ -41,7 +41,7 @@ exports.login = async (req, res) => {
       return res.status(400).json({ message: 'Invalid email or password' });
     }
 
-    const token = jwt.sign({ id: user._id }, 'your_jwt_secret', { expiresIn: '1h' });
+    const token = jwt.sign({ id: user._id }, 'ihhoh88h8h8h8h', { expiresIn: '1h' });
 
     res.status(200).json({ token, user });
   } catch (error) {

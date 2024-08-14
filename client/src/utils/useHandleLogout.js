@@ -18,7 +18,7 @@ export function useHandleLogout() {
         dispatch(LogoutHandler(null));
 
         // Redirect to login page
-        navigate('/login');
+        window.location.reload();
     };
 
     return handleLogout;

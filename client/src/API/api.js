@@ -3,7 +3,6 @@ import Cookies from "js-cookie";
 import { useHandleLogout } from "../utils/useHandleLogout";
 
 const BASE_URL = "http://localhost:8080/api";
-let accessToken = Cookies.get("access_token");
 let refreshToken = Cookies.get("refresh_token");
 
 // Public axios instance (no authorization)
@@ -25,7 +24,7 @@ const privateApi = axios.create({
 // Request interceptor for privateApi to add access token to headers
 privateApi.interceptors.request.use(
   (config) => {
-    config.headers["Authorization"] = `Bearer ${accessToken}`;
+    config.headers["Authorization"] = `Bearer ${refreshToken}`;
     return config;
   },
   (error) => Promise.reject(error)
@@ -119,6 +118,50 @@ export const handleSignup = async (data) => {
 export const handleUpdateProfile = async (data) => {
   try {
     const response = await privateApi.put("/accounts/update-profile/1/", data);
+    return response;
+  } catch (error) {
+    return error;
+  }
+};
+
+// S.No 4
+// Create Course Handler
+export const handleCreateCourse = async (course) => {
+  try {
+    const response = await privateApi.post('/course/courses', course);
+    return response;
+  } catch (error) {
+    return error;
+  }
+};
+
+// S.No 5
+// Update Course Handler
+export const handleUpdateCourse = async (id,course) => {
+  try {
+    const response = await privateApi.put(`/course/courses/${id}`, course);
+    return response;
+  } catch (error) {
+    return error;
+  }
+};
+
+// S.No 6
+// Get Course Handler
+export const handleGetCourse = async () => {
+  try {
+    const response = await privateApi.get('/course/courses');
+    return response;
+  } catch (error) {
+    return error;
+  }
+};
+
+// S.No 7
+// Get Course Handler
+export const handleDeleteCourse = async (id) => {
+  try {
+    const response = await privateApi.delete(`/course/courses/${id}`);
     return response;
   } catch (error) {
     return error;
